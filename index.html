@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSN Messenger - Christine & Christian</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="chat-window position-relative" id="chatWindow" aria-label="MSN Messenger chat window">
+      <div class="d-flex justify-content-between align-items-center handle px-2">
+        <div class="d-flex align-items-center">
+          <img src="assets/images/user/user-online.png" alt="Online user icon" width="35" height="35" class="p-1">
+          <div class="d-grid">
+            <span class="ps-1 fw-bold lh-1">Christine</span>
+            <span class="ps-1 lh-1">snakker med Christian</span>
+          </div>
+        </div>
+        <div class="d-flex gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#787878" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"></path>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#787878" viewBox="0 0 16 16">
+            <path d="M3 3.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m1.5 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"></path>
+            <path d="M.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5zM1 5V2h14v3zm0 1h14v8H1z"></path>
+          </svg>
+          <svg class="close-btn" xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#787878" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 p-2 border-top action-toolbar">
+        <img role="button" src="assets/images/user/user-invite.png" alt="Icon" width="20" height="20">
+        <img role="button" src="assets/images/msn-icons/folder.png" alt="Icon" width="20" height="20">
+        <img role="button" src="assets/images/msn-icons/music.png" alt="Icon" width="20" height="20">
+        <img role="button" src="assets/images/msn-icons/phone.png" alt="Icon" width="20" height="20">
+        <img role="button" src="assets/images/msn-icons/games.png" alt="Icon" width="20" height="20">
+        <img role="button" src="assets/images/user/user-blocked.png" alt="Icon" width="20" height="20">
+      </div>
+
+      <div class="row g-0 mx-2 messages-block-row">
+        <div class="col col-md-9">
+          <div class="me-2 messages-block white-box d-flex flex-column pt-1 overflow-auto">
+            <div class="transcript" id="transcript" aria-live="polite">
+            </div>
+            <div id="messagesEnd"></div>
+          </div>
+
+          <div class="d-flex justify-content-center mb-0 separator">
+            <span class="fw-bolder">. . . . . . . . </span>
+          </div>
+
+          <div class="white-box me-2">
+            <div class="d-flex gap-2 chat-box-toolbar toolbar-wrap">
+              <div class="px-2 my-1 border-end toolbar-group position-relative">
+                <button type="button" class="dropdown-toggle" id="emojiToggle" aria-expanded="false">
+                  <img src="assets/images/msn-icons/emoticon.png" alt="Emoji">
+                </button>
+                <div class="emoji-picker" id="emojiPicker" hidden></div>
+                <img class="ps-2" src="assets/images/nudge.png" alt="Nudge icon" role="button" id="nudgeButton">
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <img src="assets/images/bg.png" alt="icons" role="button" width="18" height="18">
+                <img src="assets/images/msn-icons/text.png" alt="icons" role="button" width="18" height="18">
+                <img src="assets/images/msn-icons/voice.png" alt="icons" role="button" width="18" height="18">
+              </div>
+            </div>
+
+            <div class="px-2 d-flex chat-box">
+              <textarea id="messageInput" class="w-100 my-1"></textarea>
+              <div class="d-grid gap-1 ps-1 py-1 chat-buttons">
+                <button id="sendButton" type="button" class="send-button"></button>
+                <button type="button" class="search-button">Search</button>
+              </div>
+            </div>
+
+            <div class="chat-box-toolbar">
+              <p class="is-writing-label m-0" id="typingLabel">&nbsp;</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-auto d-flex flex-column justify-content-between">
+          <div class="p-lg-2 p-1 bg-white">
+            <img src="assets/images/user.png" alt="User profile" width="100" class="user-profile-pic border border-2 border-white">
+          </div>
+          <div class="p-lg-2 p-1 bg-white">
+            <img src="assets/images/user.png" alt="User profile" width="100" class="user-profile-pic border border-2 border-white">
+          </div>
+        </div>
+      </div>
+
+      <div class="position-absolute bottom-0 footer-bar">
+        <img src="assets/favicon.ico" alt="Windows Live Messenger icon" width="25" height="25" class="p-1">
+        <span class="ps-1">Windows Live Messenger</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
