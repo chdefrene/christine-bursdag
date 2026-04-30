@@ -1,6 +1,6 @@
 .chat-window {
   width: 500px;
-  height: 550px;
+  height: 560px;
   border: 1px solid #848484;
   box-shadow: inset 0 0 4px 1px #ddddddc2;
   background: url("assets/images/msn-background.png"), #e8f2f4;
@@ -330,7 +330,7 @@ button {
 
 .messages-block-row {
   grid-template-columns: minmax(0, 1fr) auto;
-  padding-bottom: 34px;
+  padding-bottom: 54px;
 }
 
 .col {

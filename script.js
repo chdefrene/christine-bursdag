@@ -9,9 +9,11 @@ const chatWindow = document.getElementById("chatWindow");
 const messagesEnd = document.getElementById("messagesEnd");
 
 const conversation = [
-  { speaker: "Christine", text: "Kjenne eg dg?", role: "user", sendMode: "manual" },
-  { speaker: "Christian", text: "Vi møttes i skolegården :P", role: "bot", sendMode: "auto" },
-  { speaker: "Christian", text: "Er du der?", role: "bot", sendMode: "auto", nudgeAfter: true }
+  // { speaker: "Christian", text: "Halla", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Kjenne eg dg? 🤔", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Vi møttes i skolegården 😝", role: "bot", sendMode: "auto" },
+  { speaker: "Christian", text: "Er du der? 😉", role: "bot", sendMode: "auto", nudgeAfter: true },
+  { speaker: "Christine", text: "D e løye! 🤣 ", role: "user", sendMode: "manual" }
 ];
 
 let typingTimer;
@@ -43,6 +45,11 @@ function setTyping(text) {
   typingLabel.textContent = text;
 }
 
+function clearInputState() {
+  messageInput.value = "";
+  sendButton.disabled = true;
+}
+
 function playAlertSound() {
   const audio = new Audio("assets/sounds/alert.mp3");
   audio.play().catch(() => {});
@@ -51,8 +58,7 @@ function playAlertSound() {
 function seedInitialTranscript() {
   waitingForAutoReply = true;
   setTyping("Christian skriver...");
-  messageInput.value = "";
-  sendButton.disabled = true;
+  clearInputState();
 
   window.setTimeout(() => {
     appendTranscriptLine("Christian", "Halla", "bot");
@@ -67,8 +73,7 @@ function applyCurrentMessageToInput() {
   const currentMessage = conversation[conversationIndex];
 
   if (!currentMessage) {
-    messageInput.value = "";
-    sendButton.disabled = true;
+    clearInputState();
     return;
   }
 
@@ -92,9 +97,14 @@ function sendAutomatedReply() {
     playAlertSound();
     conversationIndex += 1;
     if (nextMessage.nudgeAfter) {
+      clearInputState();
+      setTyping("\u00A0");
       window.setTimeout(() => {
         playNudgeSound();
+        waitingForAutoReply = false;
+        sendAutomatedReply();
       }, 3000);
+      return;
     }
     waitingForAutoReply = false;
     setTyping("\u00A0");
