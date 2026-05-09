@@ -8,12 +8,24 @@ const emojiPicker = document.getElementById("emojiPicker");
 const chatWindow = document.getElementById("chatWindow");
 const messagesEnd = document.getElementById("messagesEnd");
 
+const MESSAGE_DELAY = 2000
+
 const conversation = [
   // { speaker: "Christian", text: "Halla", role: "bot", sendMode: "auto" },
-  { speaker: "Christine", text: "Kjenne eg dg? 🤔", role: "user", sendMode: "manual" },
-  { speaker: "Christian", text: "Vi møttes i skolegården 😝", role: "bot", sendMode: "auto" },
-  { speaker: "Christian", text: "Er du der? 😉", role: "bot", sendMode: "auto", nudgeAfter: true },
-  { speaker: "Christine", text: "D e løye! 🤣 ", role: "user", sendMode: "manual" }
+  { speaker: "Christine", text: "Kjenne eg deg? 🤔", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Traff deg i skolegården i dag 😛", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Å, d var deg! 😄", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Ja, flaks jeg fant deg her på msn! 😅", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "D e løye! 🤣 ", role: "user", sendMode: "manual", nudgeAfter: true },
+  { speaker: "Christian", text: "Hva driver du med? 😉", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Akkurat feiret bursdag med fammen. Hva med deg? 😎", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Å, hadde du bursdag i dag? Gratulerer med dagen! 🥳", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Takk ☺️", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Har du fått noe fint i gave da?", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Fikk ny sykkel av pappa", role: "user", sendMode: "manual" },
+  { speaker: "Christine", text: "Og så hadde mamma laget asparges suppe!", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Det hørtes ikke akkurat ut som tradisjonell bursdagsmat 😄", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Eg elske d! Yummy 😋", role: "user", sendMode: "manual" },
 ];
 
 let typingTimer;
@@ -66,7 +78,8 @@ function seedInitialTranscript() {
     waitingForAutoReply = false;
     setTyping("\u00A0");
     applyCurrentMessageToInput();
-  }, 2000);
+  }, MESSAGE_DELAY
+  );
 }
 
 function applyCurrentMessageToInput() {
@@ -80,6 +93,26 @@ function applyCurrentMessageToInput() {
   messageInput.readOnly = true;
   messageInput.value = currentMessage.text;
   sendButton.disabled = false;
+}
+
+function continueConversationAfterMessage(message) {
+  if (message.nudgeAfter) {
+    clearInputState();
+    setTyping("\u00A0");
+    waitingForAutoReply = true;
+
+    window.setTimeout(() => {
+      playNudgeSound();
+      waitingForAutoReply = false;
+      sendAutomatedReply();
+    }, MESSAGE_DELAY);
+
+    return;
+  }
+
+  waitingForAutoReply = false;
+  setTyping("\u00A0");
+  sendAutomatedReply();
 }
 
 function sendAutomatedReply() {
@@ -96,20 +129,9 @@ function sendAutomatedReply() {
     appendTranscriptLine(nextMessage.speaker, nextMessage.text, nextMessage.role);
     playAlertSound();
     conversationIndex += 1;
-    if (nextMessage.nudgeAfter) {
-      clearInputState();
-      setTyping("\u00A0");
-      window.setTimeout(() => {
-        playNudgeSound();
-        waitingForAutoReply = false;
-        sendAutomatedReply();
-      }, 3000);
-      return;
-    }
-    waitingForAutoReply = false;
-    setTyping("\u00A0");
-    sendAutomatedReply();
-  }, 2600);
+    continueConversationAfterMessage(nextMessage);
+  }, MESSAGE_DELAY
+  );
 }
 
 function sendMessage() {
@@ -125,8 +147,7 @@ function sendMessage() {
   appendTranscriptLine(currentMessage.speaker, currentMessage.text, currentMessage.role);
   conversationIndex += 1;
   messageInput.value = "";
-  setTyping("\u00A0");
-  sendAutomatedReply();
+  continueConversationAfterMessage(currentMessage);
 }
 
 function populateEmojiPicker() {
