@@ -19,13 +19,19 @@ const conversation = [
   { speaker: "Christine", text: "D e løye! 🤣 ", role: "user", sendMode: "manual", nudgeAfter: true },
   { speaker: "Christian", text: "Hva driver du med? 😉", role: "bot", sendMode: "auto" },
   { speaker: "Christine", text: "Akkurat feiret bursdag med fammen. Hva med deg? 😎", role: "user", sendMode: "manual" },
-  { speaker: "Christian", text: "Å, hadde du bursdag i dag? Gratulerer med dagen! 🥳", role: "bot", sendMode: "auto" },
+  { speaker: "Christian", text: "Har du bursdag? Gratulerer med dagen! 🥳", role: "bot", sendMode: "auto" },
   { speaker: "Christine", text: "Takk ☺️", role: "user", sendMode: "manual" },
-  { speaker: "Christian", text: "Har du fått noe fint i gave da?", role: "bot", sendMode: "auto" },
-  { speaker: "Christine", text: "Fikk ny sykkel av pappa", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Fått noe fint i gave da?", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Fikk mye forskjellig", role: "user", sendMode: "manual" },
   { speaker: "Christine", text: "Og så hadde mamma laget asparges suppe!", role: "user", sendMode: "manual" },
   { speaker: "Christian", text: "Det hørtes ikke akkurat ut som tradisjonell bursdagsmat 😄", role: "bot", sendMode: "auto" },
   { speaker: "Christine", text: "Eg elske d! Yummy 😋", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Godt du fikk det på bursdagen din da!", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "Haha, ja 😊", role: "user", sendMode: "manual" },
+  { speaker: "Christian", text: "Synd du ikke fikk en gave fra meg da 😢", role: "bot", sendMode: "auto" },
+  { speaker: "Christian", text: "En gang i fremtiden skal jeg kjøpe noe fint til deg.", role: "bot", sendMode: "auto" },
+  { speaker: "Christian", text: "Da kommer jeg til å legge det under puten i senga di", role: "bot", sendMode: "auto" },
+  { speaker: "Christine", text: "D høres koselig ut! Gleder meg 😊", role: "user", sendMode: "manual" },
 ];
 
 let typingTimer;
